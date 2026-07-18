@@ -346,7 +346,8 @@ async function renderLogs(){
 
 function renderSettings(){
   const s={env:{
-    ANTHROPIC_BASE_URL:"http://localhost:"+(window.__port||4000),
+    ANTHROPIC_API_URL:"http://127.0.0.1:"+(window.__port||4000),
+    ANTHROPIC_BASE_URL:"http://127.0.0.1:"+(window.__port||4000),
     ANTHROPIC_AUTH_TOKEN:"sk-local-proxy",
     ANTHROPIC_MODEL:"default",
     ANTHROPIC_SMALL_FAST_MODEL:"default",

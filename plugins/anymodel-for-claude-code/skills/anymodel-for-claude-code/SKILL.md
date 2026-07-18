@@ -103,6 +103,7 @@ node proxy.js
 ```json
 {
   "env": {
+    "ANTHROPIC_API_URL": "http://127.0.0.1:4000",
     "ANTHROPIC_BASE_URL": "http://127.0.0.1:4000",
     "ANTHROPIC_AUTH_TOKEN": "sk-local-proxy",
     "ANTHROPIC_MODEL": "default",
@@ -115,7 +116,8 @@ node proxy.js
 }
 ```
 
-- `ANTHROPIC_BASE_URL`：本地代理地址（用 `127.0.0.1` 避免 IPv6 歧义）
+- `ANTHROPIC_API_URL`：本地代理地址（新版 Claude Code 优先识别此变量；用 `127.0.0.1` 避免 IPv6 歧义）
+- `ANTHROPIC_BASE_URL`：兼容旧版 Claude Code 的备用变量（与 `API_URL` 保持一致即可）
 - `ANTHROPIC_MODEL`：**设 `default`**，之后在管理界面点一下即可换模型，无需重启 Claude Code
 - `ANTHROPIC_AUTH_TOKEN`：代理不校验，填任意值
 
@@ -193,6 +195,7 @@ curl -sN -X POST http://127.0.0.1:4000/v1/messages \
 如果不想跑本地代理，可用 **OpenRouter**（免部署）：
 
 ```
+ANTHROPIC_API_URL  = https://openrouter.ai/api/anthropic
 ANTHROPIC_BASE_URL = https://openrouter.ai/api/anthropic
 ANTHROPIC_MODEL    = deepseek/deepseek-chat
 ANTHROPIC_AUTH_TOKEN = <OpenRouter Key>

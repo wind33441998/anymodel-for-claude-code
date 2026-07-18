@@ -54,6 +54,7 @@
 ```json
 {
   "env": {
+    "ANTHROPIC_API_URL": "http://127.0.0.1:4000",
     "ANTHROPIC_BASE_URL": "http://127.0.0.1:4000",
     "ANTHROPIC_AUTH_TOKEN": "sk-local-proxy",
     "ANTHROPIC_MODEL": "default"
