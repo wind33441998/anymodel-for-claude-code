@@ -1,9 +1,9 @@
 ---
 name: anymodel-for-claude-code
-description: AnyModel for Claude Code —— 让 Claude Code 免 VPN、免信用卡，直接使用任意模型（DeepSeek / 硅基流动 SiliconFlow / OpenRouter / 智谱 GLM / Kimi / Google Gemini / 通义千问 Qwen / Groq 等 8 家 21 个模型）。本地零依赖 Node 代理做 Anthropic↔OpenAI 协议转换，tool use 双向转换，管理界面一键切换，API Key 本地落盘，Windows 友好。触发词：Claude Code 换模型、用 DeepSeek、用国产大模型、免 VPN 用 Claude Code、Claude Code 代理、本地模型网关、multi-provider gateway、AnyModel、make Claude Code use any model
+description: AnyModel Gateway for Claude Code —— 一个本地零依赖的多模型网关，让 Claude Code 通过统一的 OpenAI 兼容端点路由到任意模型（Claude / DeepSeek / SiliconFlow / OpenRouter / 智谱 GLM / Kimi / Gemini / Qwen / Groq 等 8 家 21 个模型）。本地 Node 代理做 Anthropic↔OpenAI 协议转换，tool use 双向转换，管理界面一键热切换，API Key 本地落盘，Windows 友好。Claude 本身是一等路由，按需为不同任务选最合适模型。触发词：Claude Code 多模型网关、multi-model gateway、model router、Claude Code 代理、local llm gateway、AnyModel、route Claude Code to any model
 ---
 
-# AnyModel for Claude Code — Claude Code 任意模型代理
+# AnyModel Gateway for Claude Code — 多模型网关
 
 ## 核心原理
 
