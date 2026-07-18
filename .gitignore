@@ -1,0 +1,4 @@
+data/
+keys.json
+node_modules/
+*.log

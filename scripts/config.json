@@ -1,6 +1,9 @@
 {
   "providers": {
     "deepseek": {
+      "display": "DeepSeek",
+      "region": "cn",
+      "icon": "🐋",
       "base_url": "https://api.deepseek.com/chat/completions",
       "api_key": "${DEEPSEEK_KEY}",
       "models": {
@@ -9,6 +12,9 @@
       }
     },
     "siliconflow": {
+      "display": "SiliconFlow 硅基流动",
+      "region": "cn",
+      "icon": "🌊",
       "base_url": "https://api.siliconflow.cn/v1/chat/completions",
       "api_key": "${SILICONFLOW_KEY}",
       "models": {
@@ -18,6 +24,9 @@
       }
     },
     "openrouter": {
+      "display": "OpenRouter",
+      "region": "intl",
+      "icon": "🌐",
       "base_url": "https://openrouter.ai/api/v1/chat/completions",
       "api_key": "${OPENROUTER_KEY}",
       "models": {
@@ -27,6 +36,9 @@
       }
     },
     "zhipu": {
+      "display": "智谱 GLM",
+      "region": "cn",
+      "icon": "🧠",
       "base_url": "https://open.bigmodel.cn/api/paas/v4/chat/completions",
       "api_key": "${ZHIPU_KEY}",
       "models": {
@@ -35,10 +47,50 @@
       }
     },
     "moonshot": {
+      "display": "Kimi (Moonshot)",
+      "region": "cn",
+      "icon": "🌙",
       "base_url": "https://api.moonshot.cn/v1/chat/completions",
       "api_key": "${MOONSHOT_KEY}",
       "models": {
         "kimi-chat": "moonshot-v1-8k"
+      }
+    },
+    "gemini": {
+      "display": "Google Gemini",
+      "region": "intl",
+      "icon": "✨",
+      "base_url": "https://generativelanguage.googleapis.com/v1beta/openai/chat/completions",
+      "api_key": "${GEMINI_KEY}",
+      "models": {
+        "gemini-2.5-pro": "gemini-2.5-pro",
+        "gemini-2.5-flash": "gemini-2.5-flash",
+        "gemini-2.0-flash": "gemini-2.0-flash"
+      }
+    },
+    "qwen": {
+      "display": "通义千问 Qwen",
+      "region": "cn",
+      "icon": "🐱",
+      "base_url": "https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions",
+      "api_key": "${QWEN_KEY}",
+      "models": {
+        "qwen-max": "qwen-max",
+        "qwen-plus": "qwen-plus",
+        "qwen-turbo": "qwen-turbo",
+        "qwen2.5-72b": "qwen2.5-72b-instruct"
+      }
+    },
+    "groq": {
+      "display": "Groq",
+      "region": "intl",
+      "icon": "⚡",
+      "base_url": "https://api.groq.com/openai/v1/chat/completions",
+      "api_key": "${GROQ_KEY}",
+      "models": {
+        "groq-llama-70b": "llama-3.3-70b-versatile",
+        "groq-llama-8b": "llama-3.1-8b-instant",
+        "groq-deepseek-r1": "deepseek-r1-distill-llama-70b"
       }
     }
   }
