@@ -93,6 +93,11 @@ node proxy.js
 
 ### Step 4：接入 Claude Code
 
+> 🧑‍💻 **完全小白看这里**：管理界面第 ③ 步「接入 Claude Code」卡片已经帮你把这件事做成了「看图操作」——
+> 卡片顶部直接显示你机器上的**目标文件路径**（如 `C:\Users\你的用户名\.claude\settings.json`），并标了它「已存在 / 未找到」。
+> 点「📋 复制 settings.json」拿到现成配置，再按卡片里的 **A→E 五步** 走完即可（含：打开文件、粘贴、保存后重启 Claude Code、怎么验证）。
+> 一句话：**复制 → 记事本打开那个文件 → 粘贴保存 → 重启 Claude Code → 发条消息看「活动日志」有没有记录。**
+
 把界面复制到的配置粘进 `~/.claude/settings.json` 的 `env` 字段：
 
 ```json
@@ -114,11 +119,16 @@ node proxy.js
 - `ANTHROPIC_MODEL`：**设 `default`**，之后在管理界面点一下即可换模型，无需重启 Claude Code
 - `ANTHROPIC_AUTH_TOKEN`：代理不校验，填任意值
 
+**两种粘贴情形（很重要）：**
+- **你是新手，从没改过 Claude Code 配置**：直接把上面整段当作 `settings.json` 的全部内容保存即可（文件不存在就新建）。
+- **你已有 settings.json（里面有其它配置，比如权限、hooks）**：**不要整段替换**！只把其中的 `"env": { ... }` 这一段加进去（或覆盖原来的 env 字段），其它内容原样保留，否则会丢配置。
+
 ### Step 5：使用
 
-1. **每次用 Claude Code 前先启动代理**（保持 `start.bat` / `proxy.js` 运行）
-2. **重开 VS Code 的 Claude Code 会话**（新会话才生效）
+1. **每次用 Claude Code 前先启动代理**（保持 `start.bat` / `proxy.js` 运行）—— 代理没开，Claude Code 会连不上
+2. **保存配置后，完全退出并重开 VS Code 的 Claude Code 会话**（新会话才生效，光刷新不够）
 3. **切换模型**：在 `http://localhost:4000` 界面点目标模型即可，Claude Code 下一次请求即用新模型
+4. **验证是否生效**：在 Claude Code 发任意一条消息，回到管理界面看「活动日志」是否出现记录；没有记录说明配置没生效，检查 Step 4 的 A~E 是否漏了「重启」或「代理在运行」
 
 ## 🔌 管理 API（界面底层，也可自行调用）
 

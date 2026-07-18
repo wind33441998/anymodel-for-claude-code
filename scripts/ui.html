@@ -130,7 +130,17 @@ pre{font-family:var(--mono);font-size:12.5px;line-height:1.7;background:#070a10;
 .logrow .ls.ok{color:var(--ok)} .logrow .ls.err{color:var(--bad)}
 .logrow .lms{color:var(--muted);width:56px;text-align:right;flex-shrink:0}
 .logempty{color:var(--muted);font-size:12px;font-family:var(--body)}
-@media(max-width:680px){.env{grid-template-columns:repeat(2,1fr)}.krow .kn{width:120px}.krow{flex-wrap:wrap}.hero .big{font-size:27px}}
+.pathbox{display:flex;align-items:center;gap:10px;flex-wrap:wrap;background:var(--panel2);border:1px solid var(--line);border-radius:11px;padding:11px 13px;margin-bottom:13px}
+.pathbox .pl{font-size:11px;color:var(--muted);font-family:var(--mono);text-transform:uppercase;letter-spacing:.5px;white-space:nowrap}
+.pathbox code{flex:1;min-width:0;font-family:var(--mono);font-size:12px;color:var(--cyan);word-break:break-all}
+.pathstate{font-family:var(--mono);font-size:11px;padding:3px 9px;border-radius:999px;white-space:nowrap}
+.pathstate.exist{color:var(--ok);background:rgba(61,220,132,.12);border:1px solid rgba(61,220,132,.3)}
+.pathstate.miss{color:var(--amber);background:rgba(255,176,32,.1);border:1px solid rgba(255,176,32,.3)}
+.copytip{font-size:12px;color:var(--muted);margin-top:9px;line-height:1.6}
+.warn{margin-top:14px;display:flex;gap:9px;align-items:flex-start;font-size:12.5px;color:var(--warn);
+  background:rgba(255,176,32,.08);border:1px solid rgba(255,176,32,.3);border-radius:11px;padding:11px 13px;line-height:1.7}
+.warn b{color:var(--amber)}
+@media(max-width:680px){.env{grid-template-columns:repeat(2,1fr)}.krow .kn{width:120px}.krow{flex-wrap:wrap}.hero .big{font-size:27px}.pathbox .pl{display:none}}
 </style>
 </head>
 <body>
@@ -164,7 +174,6 @@ pre{font-family:var(--mono);font-size:12.5px;line-height:1.7;background:#070a10;
       </div>
       <div style="display:flex;gap:10px;flex-wrap:wrap">
         <button class="btn ghost" id="selftestBtn" data-zh="🔧 运行自检" data-en="🔧 Self-test">🔧 运行自检</button>
-        <button class="btn" id="copyBtn" data-zh="📋 复制 settings.json" data-en="📋 Copy settings.json">📋 复制 settings.json</button>
       </div>
     </div>
   </div>
@@ -181,11 +190,25 @@ pre{font-family:var(--mono);font-size:12.5px;line-height:1.7;background:#070a10;
 
   <div class="card r" style="animation-delay:.32s" id="guideCard">
     <div class="ct"><span class="num">3</span><span data-zh="接入 Claude Code" data-en="Connect Claude Code">接入 Claude Code</span></div>
-<pre id="settingsCode"></pre>
+
+    <div class="pathbox">
+      <span class="pl" data-zh="目标文件" data-en="Target file">目标文件</span>
+      <code id="claudePath">~/.claude/settings.json</code>
+      <span id="pathState" class="pathstate"></span>
+    </div>
+
+    <pre id="settingsCode"></pre>
+    <button class="btn" id="copyBtn" data-zh="📋 复制 settings.json" data-en="📋 Copy settings.json">📋 复制 settings.json</button>
+    <div class="copytip" data-zh="复制后：用记事本打开上面的目标文件，把内容粘贴进去并保存（如不会，按下面 5 步操作）。" data-en="After copying: open the target file above in Notepad, paste and save (follow the 5 steps below if unsure).">复制后：用记事本打开上面的目标文件，把内容粘贴进去并保存（如不会，按下面 5 步操作）。</div>
+
+    <div class="warn"><span>⚠️</span><span id="warnText"></span></div>
+
     <div class="steps">
-      <div class="step"><span class="sn">1</span><span data-zh="保持本代理运行（双击 start.bat 或 node proxy.js）。" data-en="Keep this proxy running (start.bat or node proxy.js).">保持本代理运行（双击 start.bat 或 node proxy.js）。</span></div>
-      <div class="step"><span class="sn">2</span><span data-zh="把上面配置写入 ~/.claude/settings.json 的 env 字段。" data-en="Paste the config into the env field of ~/.claude/settings.json.">把上面配置写入 ~/.claude/settings.json 的 env 字段。</span></div>
-      <div class="step"><span class="sn">3</span><span data-zh="重开 Claude Code 会话，界面切换即时生效。" data-en="Restart Claude Code; switching here applies instantly.">重开 Claude Code 会话，界面切换即时生效。</span></div>
+      <div class="step"><span class="sn">A</span><span data-zh="保持代理运行：每次用 Claude Code 前，先双击 start.bat 或 node proxy.js（本界面能打开就说明它开着）。" data-en="Keep the proxy running: before each Claude Code session, run start.bat or node proxy.js (if this page opens, it's running).">保持代理运行：每次用 Claude Code 前，先双击 start.bat 或 node proxy.js（本界面能打开就说明它开着）。</span></div>
+      <div class="step"><span class="sn">B</span><span data-zh="打开目标文件：复制上方「目标文件」路径，在资源管理器地址栏粘贴并回车；右键 settings.json → 用记事本打开（没有这个文件就新建一个同名空白文件）。" data-en="Open the target file: copy the path above, paste it into File Explorer's address bar and press Enter; right-click settings.json → open with Notepad (if missing, create a new blank file with that name).">打开目标文件：复制上方「目标文件」路径，在资源管理器地址栏粘贴并回车；右键 settings.json → 用记事本打开（没有这个文件就新建一个同名空白文件）。</span></div>
+      <div class="step"><span class="sn">C</span><span data-zh="粘贴保存：把刚复制的内容粘进去。新手（文件是空的/不存在）直接整段保存；老手（已有配置）只贴 env 那段、保留其它内容。" data-en="Paste &amp; save: paste what you copied. New users (empty/missing file) save the whole thing; existing users paste only the env block and keep the rest.">粘贴保存：把刚复制的内容粘进去。新手（文件是空的/不存在）直接整段保存；老手（已有配置）只贴 env 那段、保留其它内容。</span></div>
+      <div class="step"><span class="sn">D</span><span data-zh="完全退出并重启 Claude Code：关闭 VS Code 里的 Claude Code 面板 / 退出终端再重开，新配置才会生效（热重载不一定生效）。" data-en="Fully quit and restart Claude Code: close the Claude Code panel in VS Code / exit the terminal, then reopen — new config only applies on restart.">完全退出并重启 Claude Code：关闭 VS Code 里的 Claude Code 面板 / 退出终端再重开，新配置才会生效（热重载不一定生效）。</span></div>
+      <div class="step"><span class="sn">E</span><span data-zh="验证是否成功：在 Claude Code 发任意一条消息，回到本界面看「活动日志」是否出现记录；或点「🔧 运行自检」。没记录 = 配置没生效，重做 B~D。" data-en="Verify: send any message in Claude Code, then check the 'Activity Log' here for a new entry; or click '🔧 Self-test'. No entry = config not applied, redo B–D.">验证是否成功：在 Claude Code 发任意一条消息，回到本界面看「活动日志」是否出现记录；或点「🔧 运行自检」。没记录 = 配置没生效，重做 B~D。</span></div>
     </div>
   </div>
 
@@ -206,7 +229,7 @@ const I18N = {
     env_claude_tip:"可能未安装 Claude Code", env_keys_tip:"去「配置密钥」填写",
     conf_yes:"✓ 已配置", conf_no:"未配置", keys_save:"保存", keys_saved:"已保存",
     region_cn:"国内", region_intl:"国际",
-    switch_ok:"已切换到 ", copied:"已复制 settings.json",
+    switch_ok:"已切换到 ", copied:"已复制 ✅ 粘到 settings.json 后重启 Claude Code",
     offline:"无法连接代理，请先启动 node proxy.js",
     selftest:"运行自检", selftest_ok:"自检通过 ✓ 链路正常", selftest_fail:"自检失败：",
     log_empty:"暂无请求 — 去 Claude Code 发一条消息，这里会实时显示。"
@@ -217,7 +240,7 @@ const I18N = {
     env_claude_tip:"Claude Code may not be installed", env_keys_tip:"Fill in 'API Keys'",
     conf_yes:"✓ Configured", conf_no:"Not set", keys_save:"Save", keys_saved:"Saved",
     region_cn:"CN", region_intl:"INTL",
-    switch_ok:"Switched to ", copied:"settings.json copied",
+    switch_ok:"Switched to ", copied:"Copied ✅ paste into settings.json, then restart Claude Code",
     offline:"Cannot reach proxy. Start 'node proxy.js' first.",
     selftest:"Self-test", selftest_ok:"Self-test passed ✓ pipeline OK", selftest_fail:"Self-test failed: ",
     log_empty:"No requests yet — send a message in Claude Code and watch it live here."
@@ -230,6 +253,10 @@ document.documentElement.setAttribute('data-theme', theme);
 function t(k){ return (I18N[lang] && I18N[lang][k]) || k; }
 function applyLang(){
   document.querySelectorAll('[data-zh]').forEach(el=>{ el.textContent = lang==='zh'?el.dataset.zh:el.dataset.en; });
+  const w=document.getElementById('warnText');
+  if(w) w.innerHTML = lang==='zh'
+    ? '如果你已有 settings.json（里面有其它配置）：<b>不要整段替换</b>，只把上面的 <b>「env」这一段</b>加进去，原有内容全部保留。'
+    : "If you already have a settings.json (with other config): <b>don't replace the whole file</b>, just add the <b>'env' block</b> above and keep everything else.";
   document.getElementById('langBtn').textContent = lang==='zh'?'EN':'中';
 }
 function toast(msg){
@@ -320,6 +347,15 @@ function renderSettings(){
   }};
   document.getElementById('settingsCode').textContent=JSON.stringify(s,null,2);
 }
+function renderClaudePath(env){
+  if(!env || !env.claudeSettings) return;
+  const p=env.claudeSettings.path;
+  window.__claudePath=p;
+  document.getElementById('claudePath').textContent=p;
+  const st=document.getElementById('pathState');
+  if(env.claudeSettings.exists){ st.textContent=lang==='zh'?'已存在':'exists'; st.className='pathstate exist'; }
+  else { st.textContent=lang==='zh'?'未找到·需新建':'not found'; st.className='pathstate miss'; }
+}
 
 async function switchModel(model){
   try{
@@ -341,7 +377,7 @@ async function loadAll(){
     const [models,env]=await Promise.all([api('/api/models'),api('/api/env')]);
     window.__port=env.port.value;
     document.getElementById('envCard').classList.remove('offline');
-    renderEnv(env); renderModels(models); renderKeys(models); renderSettings(); renderLogs();
+    renderEnv(env); renderModels(models); renderKeys(models); renderSettings(); renderClaudePath(env); renderLogs();
   }catch(e){
     document.getElementById('envCard').classList.add('offline');
     toast(t('offline'));
