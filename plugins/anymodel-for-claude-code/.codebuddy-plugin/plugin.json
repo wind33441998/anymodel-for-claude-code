@@ -1,0 +1,9 @@
+{
+  "name": "anymodel-for-claude-code",
+  "description": "Claude Code 任意模型代理：零依赖本地 Node 代理做 Anthropic↔OpenAI 协议转换，完整 tool use 双向转换，自带管理界面（http://localhost:4000）一键切模型/配Key，Windows 友好，中文文档。支持 DeepSeek / 硅基流动 / OpenRouter / 智谱 GLM / Kimi / Gemini / Qwen / Groq 等 8 家 21 模型。",
+  "version": "1.0.0",
+  "author": { "name": "wind33441998" },
+  "license": "MIT",
+  "homepage": "https://github.com/wind33441998/anymodel-for-claude-code",
+  "repository": "https://github.com/wind33441998/anymodel-for-claude-code"
+}

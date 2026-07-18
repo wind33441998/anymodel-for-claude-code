@@ -212,18 +212,20 @@ ANTHROPIC_AUTH_TOKEN = <OpenRouter Key>
 | 500 "缺少 API key" | Key 未配 | 在界面「配置 API 密钥」填写，或在环境变量 / `data/keys.json` 设好 |
 | 界面点切换没反应 | 代理未运行 | 先启动 `proxy.js`，界面会提示「无法连接代理」 |
 
-## 📤 发布到 Skill 应用商店
+## 📤 发布到 CodeBuddy 插件市场
 
-CodeBuddy 的插件市场基于 git 仓库，发布流程：
+本仓库已按 CodeBuddy 插件市场规范组织：根目录含 `.codebuddy-plugin/marketplace.json`（市场清单），插件位于 `plugins/anymodel-for-claude-code/`（含 `.codebuddy-plugin/plugin.json` + `skills/anymodel-for-claude-code/`）。
 
-1. **本地仓库**：将 skill 目录初始化为 git 仓库
-2. **推送到公开平台**：推送到 GitHub 公开仓库（如 `username/anymodel-for-claude-code`）
-3. **分享安装**：他人通过 CodeBuddy 命令安装
+发布流程：
+
+1. **推送到 GitHub 公开仓库**（如 `wind33441998/anymodel-for-claude-code`）
+2. **他人在 CodeBuddy 内添加市场并安装**：
    ```
-   /plugin marketplace add https://github.com/username/anymodel-for-claude-code
-   /plugin install anymodel-for-claude-code
+   /plugin marketplace add wind33441998/anymodel-for-claude-code
+   /plugin install anymodel-for-claude-code@anymodel-marketplace
    ```
-4. **变现**：CodeBuddy 官方 marketplace 为开源协作模式，若需商业化分发，可在仓库 README 引导赞助/付费授权
+   > 也可用完整 URL：`/plugin marketplace add https://github.com/wind33441998/anymodel-for-claude-code`
+3. **变现**：CodeBuddy 官方 marketplace 为开源协作模式，若需商业化分发，可在仓库 README 引导赞助/付费授权；付费渠道另走 SkillHQ / SkillStack
 
 ## Resources
 
