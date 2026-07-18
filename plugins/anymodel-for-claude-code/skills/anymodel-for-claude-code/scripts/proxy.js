@@ -83,6 +83,8 @@ function resolveProvider(model) {
   for (const [name] of Object.entries(config.providers)) {
     if (model.startsWith(name + '-') || model.startsWith(name + '/')) return { provider: name, upstream: model.slice(name.length + 1) };
   }
+  // 未知模型名（如 Claude Code 扩展默认的 claude-3-5-sonnet-20240620）fallback 到当前激活模型，避免把不认识的 upstream 名发给供应商
+  if (state.current && modelMap[state.current]) return modelMap[state.current];
   const first = Object.keys(config.providers).find(n => !config.providers[n].internal);
   if (!first) return null;
   return { provider: first, upstream: model };
