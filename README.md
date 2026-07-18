@@ -1,6 +1,12 @@
-# Claude Code 多模型代理 Skill
+# AnyModel for Claude Code — 让 Claude Code 用任意模型
+
+> 给 Claude Code 装上「万能模型网关」：**免 VPN、免信用卡**，直接用 DeepSeek、硅基流动、OpenRouter、智谱 GLM、Kimi、Gemini、通义千问、Groq 等 8 家 21 个模型。本地零依赖 Node 代理，界面一键切换，Windows 友好。
 
 让 Claude Code 免费使用 DeepSeek、SiliconFlow、智谱 GLM、Kimi、Google Gemini、通义千问、Groq 等 **8 家 21 个模型**，无需 Anthropic 官方 API。自带**管理界面**，点一下切换模型，密钥存本机。
+
+**English**: AnyModel for Claude Code — a zero-dependency local Node proxy that lets Claude Code use *any* OpenAI-compatible model (DeepSeek, SiliconFlow, OpenRouter, Zhipu GLM, Kimi, Gemini, Qwen, Groq). No VPN, no Anthropic API key, Windows-friendly, with a GUI model switcher.
+
+**标签 / Tags**: `claude-code` · `deepseek` · `anthropic` · `openai` · `proxy` · `multi-model` · `api-conversion` · `no-vpn` · `zero-dependency` · `windows` · `anymodel` · `llm-gateway` · `国产大模型` · `免VPN` · `模型网关`
 
 <!-- 如果这个 skill 帮到了你，欢迎请作者喝杯咖啡 ☕ -->
 
@@ -20,8 +26,8 @@
 ## 📦 安装（作为 CodeBuddy Skill）
 
 ```bash
-/plugin marketplace add https://github.com/<你的用户名>/claude-code-proxy-setup
-/plugin install claude-code-proxy-setup
+/plugin marketplace add https://github.com/<你的用户名>/anymodel-for-claude-code
+/plugin install anymodel-for-claude-code
 ```
 
 或手动复制 `scripts/` 整个目录到本地。

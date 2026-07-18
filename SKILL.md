@@ -1,9 +1,9 @@
 ---
-name: claude-code-proxy-setup
-description: 将 Claude Code 切换到任意外部模型（DeepSeek/SiliconFlow/OpenRouter/智谱GLM/Kimi/Gemini/Qwen/Groq 共 8 家 21 个模型），通过本地零依赖 Node 代理实现 Anthropic ↔ OpenAI 协议转换，支持 tool use 双向转换、管理界面一键切换、API Key 本地落盘。触发词：Claude Code 换模型、切换模型、用 DeepSeek、用 SiliconFlow、外部模型、代理网关、多模型、模型面板
+name: anymodel-for-claude-code
+description: AnyModel for Claude Code —— 让 Claude Code 免 VPN、免信用卡，直接使用任意模型（DeepSeek / 硅基流动 SiliconFlow / OpenRouter / 智谱 GLM / Kimi / Google Gemini / 通义千问 Qwen / Groq 等 8 家 21 个模型）。本地零依赖 Node 代理做 Anthropic↔OpenAI 协议转换，tool use 双向转换，管理界面一键切换，API Key 本地落盘，Windows 友好。触发词：Claude Code 换模型、用 DeepSeek、用国产大模型、免 VPN 用 Claude Code、Claude Code 代理、本地模型网关、multi-provider gateway、AnyModel、make Claude Code use any model
 ---
 
-# Claude Code 外部多模型代理配置
+# AnyModel for Claude Code — Claude Code 任意模型代理
 
 ## 核心原理
 
@@ -217,11 +217,11 @@ ANTHROPIC_AUTH_TOKEN = <OpenRouter Key>
 CodeBuddy 的插件市场基于 git 仓库，发布流程：
 
 1. **本地仓库**：将 skill 目录初始化为 git 仓库
-2. **推送到公开平台**：推送到 GitHub 公开仓库（如 `username/claude-code-proxy-setup`）
+2. **推送到公开平台**：推送到 GitHub 公开仓库（如 `username/anymodel-for-claude-code`）
 3. **分享安装**：他人通过 CodeBuddy 命令安装
    ```
-   /plugin marketplace add https://github.com/username/claude-code-proxy-setup
-   /plugin install claude-code-proxy-setup
+   /plugin marketplace add https://github.com/username/anymodel-for-claude-code
+   /plugin install anymodel-for-claude-code
    ```
 4. **变现**：CodeBuddy 官方 marketplace 为开源协作模式，若需商业化分发，可在仓库 README 引导赞助/付费授权
 
