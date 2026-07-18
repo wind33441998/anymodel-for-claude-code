@@ -251,10 +251,14 @@ function handleMessages(a, res) {
     if (done) return; done = true;
     logReq({ type: 'message', model: a.model || '', provider: target ? target.provider : null, status, err: err || null, ms: Date.now() - started });
   }
-  if (!target) { res.writeHead(500); res.end(JSON.stringify({ error: '没有配置任何 provider，请检查 config.json 或设置 DEEPSEEK_KEY' })); complete('error', 'no provider'); return; }
+  function sendErr(statusCode, type, message) {
+    res.writeHead(statusCode, { 'Content-Type': 'application/json; charset=utf-8' });
+    res.end(JSON.stringify({ type: 'error', error: { type, message } }));
+  }
+  if (!target) { sendErr(400, 'invalid_request_error', '没有配置任何 provider，请检查 config.json 或设置 DEEPSEEK_KEY'); complete('error', 'no provider'); return; }
   const provider = config.providers[target.provider];
   if (!provider.internal && !effectiveKey(target.provider)) {
-    res.writeHead(500); res.end(JSON.stringify({ error: 'provider [' + target.provider + '] 缺少 API key，请在界面填写或设置对应环境变量' }));
+    sendErr(401, 'authentication_error', 'provider [' + target.provider + '] 缺少 API key，请在界面填写或设置对应环境变量');
     complete('error', 'missing key'); return;
   }
   // 自检模式：不触网，直接回放模拟流
@@ -272,7 +276,7 @@ function handleMessages(a, res) {
     headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + effectiveKey(target.provider), 'Accept': 'text/event-stream' }
   };
   const req = https.request(options, (upstream) => { pipeUpstream(upstream, a, res, complete); });
-  req.on('error', (e) => { res.writeHead(500); res.end(JSON.stringify({ error: e.message })); complete('error', e.message); });
+  req.on('error', (e) => { sendErr(500, 'api_error', e.message); complete('error', e.message); });
   req.write(body);
   req.end();
 }
@@ -303,7 +307,7 @@ http.createServer(async (req, res) => {
   if (req.method === 'POST' && url.startsWith('/v1/messages')) {
     let body = '';
     req.on('data', c => body += c);
-    req.on('end', () => { try { handleMessages(JSON.parse(body), res); } catch (e) { res.writeHead(400); res.end(JSON.stringify({ error: e.message })); } });
+    req.on('end', () => { try { handleMessages(JSON.parse(body), res); } catch (e) { res.writeHead(400, { 'Content-Type': 'application/json; charset=utf-8' }); res.end(JSON.stringify({ type: 'error', error: { type: 'invalid_request_error', message: e.message } })); } });
     return;
   }
   if (req.method === 'GET' && (url === '/' || url === '/ui' || url === '/ui.html')) { serveUI(res); return; }
