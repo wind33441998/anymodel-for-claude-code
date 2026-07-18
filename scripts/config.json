@@ -1,0 +1,45 @@
+{
+  "providers": {
+    "deepseek": {
+      "base_url": "https://api.deepseek.com/chat/completions",
+      "api_key": "${DEEPSEEK_KEY}",
+      "models": {
+        "deepseek-chat": "deepseek-chat",
+        "deepseek-reasoner": "deepseek-reasoner"
+      }
+    },
+    "siliconflow": {
+      "base_url": "https://api.siliconflow.cn/v1/chat/completions",
+      "api_key": "${SILICONFLOW_KEY}",
+      "models": {
+        "sf-qwen-72b": "Qwen/Qwen2.5-72B-Instruct",
+        "sf-deepseek-v3": "deepseek-ai/DeepSeek-V3",
+        "sf-glm-4-9b": "ZhipuAI/glm-4-9b-chat"
+      }
+    },
+    "openrouter": {
+      "base_url": "https://openrouter.ai/api/v1/chat/completions",
+      "api_key": "${OPENROUTER_KEY}",
+      "models": {
+        "or-deepseek": "deepseek/deepseek-chat",
+        "or-qwen": "qwen/qwen-72b-instruct",
+        "or-llama": "meta-llama/llama-3.1-70b-instruct"
+      }
+    },
+    "zhipu": {
+      "base_url": "https://open.bigmodel.cn/api/paas/v4/chat/completions",
+      "api_key": "${ZHIPU_KEY}",
+      "models": {
+        "glm-4-plus": "glm-4-plus",
+        "glm-4-air": "glm-4-air"
+      }
+    },
+    "moonshot": {
+      "base_url": "https://api.moonshot.cn/v1/chat/completions",
+      "api_key": "${MOONSHOT_KEY}",
+      "models": {
+        "kimi-chat": "moonshot-v1-8k"
+      }
+    }
+  }
+}
