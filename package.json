@@ -1,0 +1,38 @@
+{
+  "name": "modelhub",
+  "version": "1.0.0",
+  "description": "Claude Code 多模型本地代理 — 国产供应商直连免翻墙，8 家 22 模型，Web 管理界面，中英双语",
+  "main": "lib/cli.js",
+  "bin": {
+    "modelhub": "bin/modelhub.js"
+  },
+  "scripts": {
+    "start": "node bin/modelhub.js start"
+  },
+  "keywords": [
+    "claude-code",
+    "anthropic",
+    "proxy",
+    "deepseek",
+    "qwen",
+    "glm",
+    "openai",
+    "llm",
+    "model-router"
+  ],
+  "author": "wind33441998",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wind33441998/modelhub"
+  },
+  "homepage": "https://github.com/wind33441998/modelhub",
+  "engines": {
+    "node": ">=14"
+  },
+  "files": [
+    "bin/",
+    "lib/",
+    "assets/"
+  ]
+}

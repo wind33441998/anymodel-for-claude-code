@@ -3,18 +3,18 @@
   "owner": {
     "name": "wind33441998"
   },
-  "description": "AnyModel for Claude Code —— 让 Claude Code 免 VPN/免信用卡使用任意模型的本地代理插件市场（8 家 21 模型，零依赖 Node 代理，Anthropic↔OpenAI 协议转换，tool use 双向转换）",
+  "description": "ModelHub —— 让 Claude Code 免 VPN/免信用卡使用任意模型的本地代理插件市场（8 家 21 模型，零依赖 Node 代理，Anthropic↔OpenAI 协议转换，tool use 双向转换）",
   "version": "1.0.0",
   "plugins": [
     {
       "name": "anymodel-for-claude-code",
       "source": "./plugins/anymodel-for-claude-code",
       "description": "Claude Code 任意模型代理：零依赖本地 Node 代理做 Anthropic↔OpenAI 协议转换，完整 tool use 双向转换，自带管理界面（http://localhost:4000）一键切模型/配Key，Windows 友好，中文文档。",
-      "version": "1.0.0",
+      "version": "1.2.0",
       "author": { "name": "wind33441998" },
       "license": "MIT",
-      "homepage": "https://github.com/wind33441998/anymodel-for-claude-code",
-      "repository": "https://github.com/wind33441998/anymodel-for-claude-code",
+      "homepage": "https://github.com/wind33441998/modelhub",
+      "repository": "https://github.com/wind33441998/modelhub",
       "keywords": ["claude-code", "deepseek", "proxy", "multi-model", "no-vpn", "zero-dependency", "windows", "llm-gateway"],
       "category": "developer-tools"
     }

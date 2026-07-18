@@ -1,96 +1,211 @@
-# AnyModel for Claude Code — 让 Claude Code 用任意模型
+# ModelHub
 
-> 给 Claude Code 装上「万能模型网关」：**免 VPN、免信用卡**，直接用 DeepSeek、硅基流动、OpenRouter、智谱 GLM、Kimi、Gemini、通义千问、Groq 等 8 家 21 个模型。本地零依赖 Node 代理，界面一键切换，Windows 友好。
+> Claude Code 多模型本地网关 — 国产供应商直连免翻墙，8 家 21 模型，Web 管理界面，完整 tool use 转换
 
-让 Claude Code 免费使用 DeepSeek、SiliconFlow、智谱 GLM、Kimi、Google Gemini、通义千问、Groq 等 **8 家 21 个模型**，无需 Anthropic 官方 API。自带**管理界面**，点一下切换模型，密钥存本机。
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-**English**: AnyModel for Claude Code — a zero-dependency local Node proxy that lets Claude Code use *any* OpenAI-compatible model (DeepSeek, SiliconFlow, OpenRouter, Zhipu GLM, Kimi, Gemini, Qwen, Groq). No VPN, no Anthropic API key, Windows-friendly, with a GUI model switcher.
+> **品牌说明**：本项目前身为 *AnyModel for Claude Code*，现统一为 **ModelHub** 品牌。Skill 安装名 `anymodel-for-claude-code` 保持不变（向后兼容），npm 包名为 `modelhub`。两者同源同核，共享 `~/.modelhub/` 数据目录。
 
-**标签 / Tags**: `claude-code` · `deepseek` · `anthropic` · `openai` · `proxy` · `multi-model` · `api-conversion` · `no-vpn` · `zero-dependency` · `windows` · `anymodel` · `llm-gateway` · `国产大模型` · `免VPN` · `模型网关`
+## 两种安装方式
 
-<!-- 如果这个 skill 帮到了你，欢迎请作者喝杯咖啡 ☕ -->
+ModelHub 提供两种形态，按需选择：
 
-## ✨ 特性
+| 形态 | 安装命令 | 适用场景 |
+|------|----------|----------|
+| **npm CLI** | `npm install -g modelhub` | 已有 Node 环境，想要命令行管理 |
+| **Skill** | `/plugin marketplace add wind33441998/modelhub` | 在 CodeBuddy / Claude Code 插件市场内安装 |
 
-- **8 家供应商 · 21 个模型别名**：DeepSeek / SiliconFlow / OpenRouter / 智谱 GLM / Kimi / Google Gemini / 通义千问 Qwen / Groq
-- **完整 tool use**：双向转换 Claude Code 的工具调用（执行命令、读写文件等核心功能正常）
-- **零依赖**：纯 Node.js 原生实现，不需要 `npm install`，**只需 Node.js ≥ 14（Python 不需要）**
-- **管理界面**：浏览器打开 `http://localhost:4000` 即可可视化选模型 / 配 Key / 一键复制 settings.json；支持中 / EN 与深 / 浅主题
-- **界面热切换**：Claude Code 设置 `ANTHROPIC_MODEL=default`，在界面点一下换模型，**无需重启 Claude Code**
-- **密钥本地落盘**：界面填的 Key 存到 `data/keys.json`（也可继续用环境变量），不进代码
-- **选择持久化**：界面切换的模型写入 `data/state.json`，代理重启后仍生效
-- **活动日志**：界面「活动日志」卡片实时显示每次请求（模型 / 供应商 / 状态 / 耗时），排查无响应时用得上
-- **内置自检（免密钥）**：界面点「🔧 运行自检」或访问 `/api/selftest` 验证整条链路；也可切到 `echo` 模型发测试请求
-- **安装前自检**：`check-env.js` 自动检查 Node / 端口 / Claude 配置 / Key，缺什么直接告诉你
+两种形态共享同一套代理核心和数据目录，配一次 Key 两边都能用。
 
-## 📦 安装（作为 CodeBuddy Skill）
+## 为什么用 ModelHub？
+
+- **零依赖** — 纯 Node.js 原生实现，无 `npm install`、无 Docker，下载即用（仅需 Node ≥ 14）
+- **国产供应商直连** — DeepSeek / 智谱 / 通义千问 / Kimi / 硅基流动，无需翻墙
+- **国际供应商也支持** — OpenRouter / Gemini / Groq，有 Key 就能连
+- **完整 tool use** — 双向转换 Claude Code 的工具调用（执行命令、读写文件等核心功能正常）
+- **Web 管理界面** — 浏览器里切模型、配密钥、看日志，不用改配置文件
+- **界面热切换** — Claude Code 配 `ANTHROPIC_MODEL=default`，在界面点一下即可切模型，无需重启
+- **中英双语** — 界面和文档都支持中文
+- **Windows 优先** — 在 Windows 上开箱即用，路径/编码坑已填平
+
+## 快速开始
+
+### 方式一：npm CLI
 
 ```bash
-/plugin marketplace add https://github.com/<你的用户名>/anymodel-for-claude-code
-/plugin install anymodel-for-claude-code
+# 全局安装
+npm install -g modelhub
+
+# 启动代理（前台运行）
+modelhub start
+
+# 配置 API Key（例如 DeepSeek）
+modelhub keys set deepseek sk-xxxxxxxx
+
+# 打开 Web 管理界面
+modelhub ui
 ```
 
-或手动复制 `scripts/` 整个目录到本地。
+### 方式二：Skill 形态
 
-## 🚀 使用步骤（界面驱动 · 推荐）
+在 CodeBuddy / Claude Code 内：
 
-1. **启动代理**：双击 `scripts/start.bat`（Windows），或 `cd scripts && node proxy.js`
-2. **打开界面**：浏览器访问 `http://localhost:4000`
-   - 看「环境自检」是否全绿
-   - 点「🔧 运行自检」验证链路（无需任何 Key）
-   - 在「配置 API 密钥」填入各家 Key（保存即写入 `data/keys.json`）
-   - 在「选择模型」点目标模型即可切换
-   - 看「活动日志」了解每次请求的状态与耗时
-   - 点「📋 复制 settings.json」拿到现成配置
-3. **接入 Claude Code**：把复制到的配置粘进 `~/.claude/settings.json` 的 `env` 字段（关键：`ANTHROPIC_MODEL` 设 `default`）
-   - 🧑‍💻 **完全小白**：界面第 ③ 步卡片已经显示你机器上的**目标文件路径**并标了「已存在 / 未找到」，按卡片里的 **A→E 五步** 操作即可（含：用记事本打开文件、粘贴、保存后重启 Claude Code、发消息验证）。
-   - ⚠️ 若你**已有** settings.json（里面有其它配置）：**不要整段替换**，只把 `env` 这一段加进去，保留其它内容；新手（文件不存在/空白）直接整段保存。
-4. **重开 Claude Code 会话**即可使用外部模型（保存配置后需完全退出并重开，光刷新不够）
-5. **以后换模型**：直接在 `http://localhost:4000` 界面点选，无需重启 Claude Code
-6. **验证**：在 Claude Code 发条消息，回到界面看「活动日志」是否出现记录；没记录说明没生效，检查代理是否在运行、是否重启了会话
+```
+/plugin marketplace add wind33441998/modelhub
+/plugin install anymodel-for-claude-code@anymodel-marketplace
+```
 
-### 最简 settings.json
+安装后双击 `start.bat`（Windows），或命令行：
 
+```bash
+cd scripts
+node proxy.js
+```
+
+### 接入 Claude Code
+
+两种方式任选：
+
+**环境变量：**
+```bash
+export ANTHROPIC_API_URL=http://127.0.0.1:4000
+export ANTHROPIC_AUTH_TOKEN=sk-local-proxy
+export ANTHROPIC_MODEL=default
+```
+
+**settings.json**（`~/.claude/settings.json`）：
 ```json
 {
   "env": {
     "ANTHROPIC_API_URL": "http://127.0.0.1:4000",
     "ANTHROPIC_BASE_URL": "http://127.0.0.1:4000",
     "ANTHROPIC_AUTH_TOKEN": "sk-local-proxy",
-    "ANTHROPIC_MODEL": "default"
+    "ANTHROPIC_MODEL": "default",
+    "ANTHROPIC_SMALL_FAST_MODEL": "default",
+    "ANTHROPIC_DEFAULT_SONNET_MODEL": "default",
+    "ANTHROPIC_DEFAULT_OPUS_MODEL": "default",
+    "ANTHROPIC_DEFAULT_HAIKU_MODEL": "default",
+    "CLAUDE_CODE_SUBAGENT_MODEL": "default"
   }
 }
 ```
 
-## 🎛 支持的模型
+> **注意**：用 `127.0.0.1` 而非 `localhost`，避免 IPv6 `::1` 解析问题。`ANTHROPIC_MODEL` 设 `default` 后可在管理界面随时热切换，无需重启 Claude Code。保存配置后需**完全退出并重开** Claude Code 会话才生效。
 
-| 别名 | 上游 | 环境变量 |
-|------|------|---------|
-| `deepseek-chat` / `deepseek-reasoner` | DeepSeek | `DEEPSEEK_KEY` |
-| `sf-qwen-72b` / `sf-deepseek-v3` / `sf-glm-4-9b` | SiliconFlow | `SILICONFLOW_KEY` |
-| `or-deepseek` / `or-qwen` / `or-llama` | OpenRouter | `OPENROUTER_KEY` |
-| `glm-4-plus` / `glm-4-air` | 智谱 GLM | `ZHIPU_KEY` |
-| `kimi-chat` | Kimi | `MOONSHOT_KEY` |
-| `gemini-2.5-pro` / `gemini-2.5-flash` / `gemini-2.0-flash` | Google Gemini | `GEMINI_KEY` |
-| `qwen-max` / `qwen-plus` / `qwen-turbo` / `qwen2.5-72b` | 通义千问 Qwen | `QWEN_KEY` |
-| `groq-llama-70b` / `groq-llama-8b` / `groq-deepseek-r1` | Groq | `GROQ_KEY` |
+## CLI 命令
 
-> 别名 `default` / `auto` 会被解析为「界面当前选中的模型」。把 Claude Code 的 `ANTHROPIC_MODEL` 设为 `default`，界面切换即时生效。
+| 命令 | 说明 |
+|------|------|
+| `modelhub start [-d] [-p PORT]` | 启动代理（`-d` 后台，`-p` 指定端口） |
+| `modelhub stop` | 停止后台代理 |
+| `modelhub status` | 查看运行状态 + 当前模型 |
+| `modelhub models` | 列出所有可用模型 |
+| `modelhub switch <model>` | 切换当前激活模型 |
+| `modelhub keys [list]` | 列出已配置的 API Key |
+| `modelhub keys set <provider> <key>` | 设置供应商 API Key |
+| `modelhub keys del <provider>` | 删除供应商 API Key |
+| `modelhub ui` | 在浏览器打开管理界面 |
+| `modelhub doctor` | 环境自检（Node / 端口 / 配置 / Key） |
+| `modelhub selftest` | 运行代理链路自检（无需 API Key） |
 
-新增模型：编辑 `config.json` 的 `providers.models` 加一行即可。
+## 支持的供应商
 
-## 💡 原理
+| 供应商 | 地区 | 模型数 | 环境变量 |
+|--------|------|--------|----------|
+| 🐋 DeepSeek | 中国 | 2 | `DEEPSEEK_KEY` |
+| 🌊 SiliconFlow 硅基流动 | 中国 | 3 | `SILICONFLOW_KEY` |
+| 🧠 智谱 GLM | 中国 | 2 | `ZHIPU_KEY` |
+| 🌙 Kimi (Moonshot) | 中国 | 1 | `MOONSHOT_KEY` |
+| 🐱 通义千问 Qwen | 中国 | 4 | `QWEN_KEY` |
+| 🌐 OpenRouter | 国际 | 3 | `OPENROUTER_KEY` |
+| ✨ Google Gemini | 国际 | 3 | `GEMINI_KEY` |
+| ⚡ Groq | 国际 | 3 | `GROQ_KEY` |
+
+API Key 可通过环境变量设置，也可通过 `modelhub keys set` 或 Web 界面配置（存入 `~/.modelhub/keys.json`，不进 git）。
+
+> 别名 `default` 和 `auto` 是特殊保留字：发给代理时解析为「界面当前选中的模型」。另有内置自检别名 **`echo`**：不消耗任何外部 API、不需要密钥，直接回放一条模拟 Anthropic SSE（含 tool_use），用于验证代理链路是否正常。
+
+## 数据目录
+
+所有配置和数据存储在 `~/.modelhub/`（Skill 和 CLI 共享）：
 
 ```
-Claude Code ──Anthropic格式──▶ 本地代理(4000) ──OpenAI格式──▶ 上游模型
+~/.modelhub/
+├── config.json      # 供应商配置（首次运行自动创建）
+├── keys.json        # API Key（不进 git）
+├── state.json       # 当前激活模型
+├── modelhub.pid     # 后台运行 PID（CLI 形态）
+└── modelhub.log     # 后台运行日志（CLI 形态）
 ```
 
-Claude Code 只支持 Anthropic 协议，本代理在中间做协议翻译，使其能调用任意 OpenAI 兼容模型，并双向转换 tool use。
+## 技术架构
 
-## ☕ 赞助
+```
+Claude Code  ──Anthropic Messages API──→  ModelHub 代理 (127.0.0.1:4000)
+                                              │
+                                    OpenAI Chat Completions
+                                              │
+                                    ┌─────────┴─────────┐
+                                    │                   │
+                              国产供应商            国际供应商
+                           (免翻墙直连)         (需网络访问)
+```
 
-如果这个 skill 对你有帮助，欢迎通过 GitHub Sponsors 支持作者持续维护更多实用 skill。
+ModelHub 将 Anthropic Messages API 请求转换为 OpenAI Chat Completions 格式，转发到上游供应商，再将响应流式转换回 Anthropic SSE 格式。完整支持 tool use 双向转换（Claude Code 执行命令、读写文件等核心功能依赖此能力）。
 
-## 📄 License
+### 管理 API
+
+| 方法 | 路径 | 说明 |
+|------|------|------|
+| GET | `/` 或 `/ui` | 管理界面 |
+| GET | `/api/env` | 环境自检结果 |
+| GET | `/api/models` | 当前模型 + 全部供应商与模型别名 |
+| GET | `/api/status` | 存活探活 |
+| GET | `/api/logs` | 活动日志（最近请求） |
+| GET | `/api/selftest` | 内置自检（回环 echo 模型，免密钥） |
+| POST | `/api/switch` | 切换当前模型 |
+| POST | `/api/keys` | 保存/清除密钥 |
+| POST | `/v1/messages` | Anthropic 协议代理入口（Claude Code 实际调用） |
+
+## 本地开发
+
+```bash
+git clone https://github.com/wind33441998/modelhub.git
+cd modelhub
+
+# CLI 形态
+node bin/modelhub.js start
+
+# 或 Skill 形态
+cd plugins/anymodel-for-claude-code/skills/anymodel-for-claude-code/scripts
+node proxy.js
+```
+
+重新打包 Skill：`python build_skill.py`（生成 `anymodel-for-claude-code.skill`）
+
+## 仓库结构
+
+```
+modelhub/
+├── bin/modelhub.js          # CLI 入口
+├── lib/cli.js               # CLI 命令分发（11 个命令）
+├── lib/proxy.js             # 代理核心（协议转换 + 管理 API）
+├── assets/config.json       # 供应商配置（8 家 21 模型）
+├── assets/ui.html           # Web 管理界面
+├── package.json             # npm 包定义
+├── plugins/                 # Skill 形态
+│   └── anymodel-for-claude-code/
+│       ├── .codebuddy-plugin/plugin.json
+│       ├── .claude-plugin/plugin.json
+│       └── skills/anymodel-for-claude-code/
+│           ├── SKILL.md
+│           └── scripts/（proxy.js / config.json / ui.html / check-env.js / start.bat）
+├── .codebuddy-plugin/marketplace.json
+├── .claude-plugin/marketplace.json
+├── build_skill.py           # Skill 打包脚本
+└── README.md
+```
+
+## License
 
 MIT

@@ -1,11 +1,11 @@
 {
   "name": "anymodel-for-claude-code",
-  "version": "1.1.0",
-  "description": "Local multi-model gateway for Claude Code — route requests to 8 providers / 21 models (Claude, DeepSeek, SiliconFlow, OpenRouter, Zhipu GLM, Kimi, Gemini, Qwen, Groq) through one OpenAI-compatible endpoint. Full tool_use two-way conversion, zero dependencies, Windows-friendly, GUI switcher at localhost:4000.",
+  "version": "1.2.0",
+  "description": "ModelHub — local multi-model gateway for Claude Code. Route requests to 8 providers / 21 models (Claude, DeepSeek, SiliconFlow, OpenRouter, Zhipu GLM, Kimi, Gemini, Qwen, Groq) through one OpenAI-compatible endpoint. Full tool_use two-way conversion, zero dependencies, Windows-friendly, GUI switcher at localhost:4000.",
   "author": {
     "name": "wind33441998"
   },
   "license": "MIT",
-  "homepage": "https://github.com/wind33441998/anymodel-for-claude-code",
-  "repository": "https://github.com/wind33441998/anymodel-for-claude-code"
+  "homepage": "https://github.com/wind33441998/modelhub",
+  "repository": "https://github.com/wind33441998/modelhub"
 }

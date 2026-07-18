@@ -4,13 +4,13 @@
     "name": "wind33441998"
   },
   "metadata": {
-    "description": "AnyModel Gateway for Claude Code — a local multi-model gateway that routes Claude Code requests to any OpenAI-compatible model (Claude, DeepSeek, Gemini, Qwen, Groq, and more). Zero-dependency Node.js proxy with full tool_use conversion.",
+    "description": "ModelHub — a local multi-model gateway that routes Claude Code requests to any OpenAI-compatible model (Claude, DeepSeek, Gemini, Qwen, Groq, and more). Zero-dependency Node.js proxy with full tool_use conversion.",
     "version": "1.0.0"
   },
   "plugins": [
     {
       "name": "anymodel-for-claude-code",
-      "description": "Local multi-model gateway for Claude Code — route requests to 8 providers / 21 models through one OpenAI-compatible endpoint. Full tool_use two-way conversion, zero dependencies, Windows-friendly.",
+      "description": "ModelHub — local multi-model gateway for Claude Code. Route requests to 8 providers / 21 models through one OpenAI-compatible endpoint. Full tool_use two-way conversion, zero dependencies, Windows-friendly.",
       "source": "./plugins/anymodel-for-claude-code",
       "strict": false,
       "skills": [
