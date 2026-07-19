@@ -4,7 +4,7 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-> **品牌说明**：本项目前身为 *AnyModel for Claude Code*，现统一为 **ModelHub** 品牌。Skill 安装名 `anymodel-for-claude-code` 保持不变（向后兼容），npm 包名为 `modelhub`。两者同源同核，共享 `~/.modelhub/` 数据目录。
+> **品牌说明**：本项目前身为 *AnyModel for Claude Code*，现统一为 **ModelHub** 品牌。Skill 安装名 `anymodel-for-claude-code` 保持不变（向后兼容），npm 包名为 `modelhub-cli`（安装后命令仍为 `modelhub`）。两者同源同核，共享 `~/.modelhub/` 数据目录。
 
 ## 两种安装方式
 
@@ -12,7 +12,7 @@ ModelHub 提供两种形态，按需选择：
 
 | 形态 | 安装命令 | 适用场景 |
 |------|----------|----------|
-| **npm CLI** | `npm install -g modelhub` | 已有 Node 环境，想要命令行管理 |
+| **npm CLI** | `npm install -g modelhub-cli` | 已有 Node 环境，想要命令行管理 |
 | **Skill** | `/plugin marketplace add wind33441998/modelhub` | 在 CodeBuddy / Claude Code 插件市场内安装 |
 
 两种形态共享同一套代理核心和数据目录，配一次 Key 两边都能用。
@@ -34,7 +34,7 @@ ModelHub 提供两种形态，按需选择：
 
 ```bash
 # 全局安装
-npm install -g modelhub
+npm install -g modelhub-cli
 
 # 启动代理（前台运行）
 modelhub start

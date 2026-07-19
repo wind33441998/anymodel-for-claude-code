@@ -1,6 +1,6 @@
 {
-  "name": "modelhub",
-  "version": "1.0.0",
+  "name": "modelhub-cli",
+  "version": "1.2.0",
   "description": "Claude Code 多模型本地代理 — 国产供应商直连免翻墙，8 家 22 模型，Web 管理界面，中英双语",
   "main": "lib/cli.js",
   "bin": {
@@ -24,7 +24,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/wind33441998/modelhub"
+    "url": "git+https://github.com/wind33441998/modelhub.git"
   },
   "homepage": "https://github.com/wind33441998/modelhub",
   "engines": {
